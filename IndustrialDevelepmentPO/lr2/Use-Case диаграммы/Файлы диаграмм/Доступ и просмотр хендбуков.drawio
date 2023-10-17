@@ -1,0 +1,55 @@
+<mxfile host="app.diagrams.net" modified="2023-10-05T04:49:25.127Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.2271 YaBrowser/23.9.0.2271 Yowser/2.5 Safari/537.36" etag="arauLIewgkK3tJXLlcfG" version="22.0.2" type="device">
+  <diagram name="Страница — 1" id="tPoT4hHvwxfY3_mr3B1R">
+    <mxGraphModel dx="1002" dy="575" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="6rCbfs4mVRWqjugRPmAf-7" value="&lt;b&gt;Сотрудники,&lt;br&gt;клиенты, студенты&amp;nbsp;&lt;/b&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="227" width="47" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="6rCbfs4mVRWqjugRPmAf-11" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Поиск и просмотр хендбука&lt;/font&gt;&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="231" y="172" width="147" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="6rCbfs4mVRWqjugRPmAf-13" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="6rCbfs4mVRWqjugRPmAf-7" target="6rCbfs4mVRWqjugRPmAf-11">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="386" y="323" as="sourcePoint" />
+            <mxPoint x="436" y="273" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6rCbfs4mVRWqjugRPmAf-14" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Скачивание хендбука&lt;/b&gt;&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="229" y="301" width="156" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="6rCbfs4mVRWqjugRPmAf-16" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="6rCbfs4mVRWqjugRPmAf-7" target="6rCbfs4mVRWqjugRPmAf-14">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="97" y="269" as="sourcePoint" />
+            <mxPoint x="241" y="222" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6rCbfs4mVRWqjugRPmAf-19" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Предложение похожих хендбуков&lt;/b&gt;&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="92" width="206" height="87" as="geometry" />
+        </mxCell>
+        <mxCell id="6rCbfs4mVRWqjugRPmAf-22" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Отправка запроса на создание хендбука&lt;/b&gt;&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="514" y="240" width="206" height="87" as="geometry" />
+        </mxCell>
+        <mxCell id="6rCbfs4mVRWqjugRPmAf-23" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.984;exitY=0.615;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="6rCbfs4mVRWqjugRPmAf-11" target="6rCbfs4mVRWqjugRPmAf-22">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="386" y="337" as="sourcePoint" />
+            <mxPoint x="436" y="287" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6rCbfs4mVRWqjugRPmAf-24" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="6rCbfs4mVRWqjugRPmAf-11" target="6rCbfs4mVRWqjugRPmAf-19">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="386" y="337" as="sourcePoint" />
+            <mxPoint x="436" y="287" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6rCbfs4mVRWqjugRPmAf-25" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;расширить&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="378" y="131" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="6rCbfs4mVRWqjugRPmAf-26" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;расширить&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="440" y="222" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
