@@ -1,0 +1,74 @@
+<!-- Напишите сценарий, который по введенной  дате 
+    определяет номер недели в году. Вывод информации
+    осуществлять в диалоговом окне. -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Определение номера недели в году</title>
+        <link
+            rel="stylesheet"
+            href="https://code.jquery.com/ui/1.12.1/themes/sunny/jquery-ui.css"
+        />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="examples/datepicker-ru.js"></script>
+    </head>
+    <body>
+        <h1>Определение номера недели в году</h1>
+
+        <label for="inputDate">Введите дату:</label>
+        <input type="text" id="inputDate" />
+
+        <button id="calculateButton">Определить номер недели</button>
+
+        <div id="dialogResult">
+            <span id="dialogResultText">asd</span>
+        </div>
+
+        <script>
+            const millisInDay = 86400000;
+            $(function () {
+                $("#inputDate").datepicker({
+                    showButtonPanel: true, // Показывать панель с кнопкой "Сегодня"
+                    showWeek: true,
+                });
+
+                $("#dialogResult").dialog({
+                    autoOpen: false,
+                    modal: true,
+                });
+
+                // Обработчик для кнопки "Определить номер недели"
+                $("#calculateButton").on("click", function () {
+                    const inputDateValue =
+                        $("#inputDate").datepicker("getDate");
+                    if (!inputDateValue) {
+                        $("#dialogResultText").text(
+                            "Пожалуйста, введите корректную дату."
+                        );
+                        $("#dialogResult").dialog("open");
+                        return;
+                    }
+
+                    const weekNumber = getWeekNumber(inputDateValue);
+                    $("#dialogResultText").text(`Номер недели: ${weekNumber}`);
+                    $("#dialogResult").dialog("open");
+                });
+
+                // Функция для определения номера недели
+                function getWeekNumber(date) {
+                    const currentDate = new Date(date);
+                    currentDate.setHours(0, 0, 0, 0);
+                    currentDate.setDate(
+                        currentDate.getDate() - (currentDate.getDay() || 7)
+                    );
+                    const yearStart = new Date(currentDate.getFullYear(), 0, 1);
+                    const weekNumber = Math.ceil(
+                        ((currentDate - yearStart) / millisInDay + 1) / 7
+                    );
+                    return weekNumber;
+                }
+            });
+        </script>
+    </body>
+</html>

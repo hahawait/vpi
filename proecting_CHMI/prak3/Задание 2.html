@@ -1,0 +1,67 @@
+<!-- Определить количество дней между двумя введенными датами. 
+    Ввод дат осуществлять двумя способами: с помощью тега input,
+     с помощью встроенного каледаря. Вывод информации осуществлять
+     в диалоговом окне. -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Расчет количества дней между датами</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://code.jquery.com/ui/1.12.1/themes/sunny/jquery-ui.css"
+        />
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="./examples/datepicker-ru.js"></script>
+    </head>
+    <body>
+        <h1>Расчет количества дней между датами</h1>
+
+        <label for="startDate">Введите первую дату:</label>
+        <input type="date" id="startDate" />
+
+        <label for="endDate">Выберите вторую дату:</label>
+        <input type="text" id="endDatePicker" />
+
+        <button id="calculateButton">Рассчитать</button>
+
+        <div id="dialogResult">
+            <span id="dialogResultText">#</span>
+        </div>
+
+        <script>
+            const millisInDay = 1000 * 60 * 60 * 24;
+
+            $(function () {
+                $("#endDatePicker").datepicker({
+                    showOtherMonths: true,
+                });
+
+                $("#dialogResult").dialog({
+                    autoOpen: false,
+                    modal: true,
+                });
+
+                $("#calculateButton").on("click", function () {
+                    const startDate = new Date($("#startDate").val());
+                    const endDate = $("#endDatePicker").datepicker("getDate");
+
+                    if (!startDate || !endDate) {
+                        alert("Пожалуйста, введите обе даты.");
+                        return;
+                    }
+
+                    const timeDifference = endDate - startDate;
+                    const daysDifference = Math.floor(
+                        timeDifference / millisInDay
+                    );
+
+                    $("#dialogResultText").text(
+                        `Количество дней между датами: ${daysDifference} дней`
+                    );
+                    $("#dialogResult").dialog("open");
+                });
+            });
+        </script>
+    </body>
+</html>

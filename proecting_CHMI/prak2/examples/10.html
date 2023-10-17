@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- События виджета Dialog -->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>jQuery UI</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/sunny/jquery-ui.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <style type="text/css">
+            .ui-widget {
+                width: 330px;
+            }
+            input,
+            label {
+                width: 160px;
+                display: inline-block;
+            }
+            #send {
+                margin: 16px;
+                width: 100px !important;
+            }
+        </style>
+        <script type="text/javascript">
+            $(function () {
+                var canClose = false;
+                var delay = 15;
+                $("#dialog").dialog({
+                    modal: true,
+                    autoOpen: false,
+                    beforeClose: function () {
+                        return canClose;
+                    },
+                    open: function () {
+                        var count = delay;
+                        var intID = setInterval(function () {
+                            count--;
+                            $("#time").text(count);
+                            if (count == 0) {
+                                clearInterval(intID);
+                                canClose = true;
+                                $("#dialog").dialog("close");
+                            }
+                        }, 1000);
+                    },
+                });
+                $("button")
+                    .button()
+                    .click(function (e) {
+                        $("#dialog").dialog("open");
+                    });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="ui-widget">
+            <label for="user">Имя пользователя: </label><input id="user" />
+            <label for="pass">Пароль: </label><input id="pass" />
+            <button id="send">Войти</button>
+        </div>
+        <div id="dialog" title="Неверный пароль">
+            Введенный вами пароль оказался неверным. Пожалуйста, повторите
+            попытку через
+            <span id="time">15</span> секунд.
+        </div>
+    </body>
+</html>

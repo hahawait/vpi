@@ -1,0 +1,14 @@
+lamp
+desk
+word
+flag
+menu
+home
+quit
+ball
+unix
+fork
+exit
+lose
+
+

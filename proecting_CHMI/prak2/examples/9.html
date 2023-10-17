@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!-- Методы виджета Dialog -->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>jQuery UI</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/sunny/jquery-ui.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#d1").dialog({
+                    //autoOpen: false,
+                    position: {
+                        my: "right top",
+                        at: "right top",
+                        collision: "none",
+                    },
+                });
+                $("#d2").dialog({
+                    // autoOpen: false,
+                    position: {
+                        my: "right top",
+                        at: "right bottom",
+                        of: $("#d1"),
+                        collision: "flipfit",
+                    },
+                });
+                $("#t1, #t2")
+                    .button()
+                    .click(function (e) {
+                        var target = this.id == "t1" ? "#d1" : "#d2";
+                        if ($(target).dialog("isOpen")) {
+                            $(target).dialog("close");
+                        } else {
+                            $(target).dialog("open");
+                        }
+                    });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="d1" class="dialog" title="Диалоговое окно 1" class="ui-widget">
+            Это первое диалоговое окно
+        </div>
+        <div id="d2" class="dialog" title="Диалоговое окно 2" class="ui-widget">
+            Это второе диалоговое окно
+        </div>
+        <div>
+            <button id="t1">
+                Вкл/выкл диалоговое<br />
+                окно 1
+            </button>
+        </div>
+        <button id="t2">
+            Вкл/выкл диалоговое<br />
+            окно 2
+        </button>
+    </body>
+</html>

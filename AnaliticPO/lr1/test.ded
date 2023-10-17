@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document>
+	<Version>
+		<Comments>Deductor Studio Academic</Comments>
+		<CompanyName>BaseGroup Labs</CompanyName>
+		<FileDescription>Deductor Studio Academic</FileDescription>
+		<FileVersion>5.2.0.89</FileVersion>
+		<InternalName>Deductor Studio Academic</InternalName>
+		<LegalCopyright>BaseGroup</LegalCopyright>
+		<LegalTrademarks>BaseGroup</LegalTrademarks>
+		<OriginalFilename>DStudio.exe</OriginalFilename>
+		<ProductName>Deductor Studio Academic</ProductName>
+		<ProductVersion>5.2</ProductVersion>
+	</Version>
+	<Properties>
+		<Author>User</Author>
+		<CompanyName>Microsoft</CompanyName>
+		<DisplayName>Тестовый проект</DisplayName>
+		<ProjectVersion>1.0</ProjectVersion>
+	</Properties>
+	<EnvironmentVariables>
+		<Version>1</Version>
+		<Vars/>
+	</EnvironmentVariables>
+	<Script>
+		<NodeCount>1</NodeCount>
+		<Root>
+			<DisplayName>Сценарии</DisplayName>
+			<NodeIndex>1</NodeIndex>
+		</Root>
+	</Script>
+	<ModelBookmarks/>
+</Document>

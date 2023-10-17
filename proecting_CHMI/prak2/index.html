@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/sunny/jquery-ui.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <style>
+            .nice {
+                margin: 10px;
+            }
+            #dialog label {
+                display: inline-block;
+                width: 120px;
+            }
+            table {
+                border-collapse: collapse;
+                border: thin solid black;
+                margin: 10px;
+            }
+            #placeholder {
+                text-align: center;
+            }
+            #show {
+                margin: 10px;
+            }
+            td,
+            th {
+                padding: 5px;
+                width: 100px;
+            }
+        </style>
+        <script>
+            let month = "Январь";
+            let year = 1970;
+            let day = 1;
+            let nowYear = new Date().getFullYear();
+            const monthsMap = {
+                1: "Январь",
+                2: "Февраль",
+                3: "Март",
+                4: "Апрель",
+                5: "Май",
+                6: "Июнь",
+                7: "Июль",
+                8: "Август",
+                9: "Сентябрь",
+                10: "Октябрь",
+                11: "Ноябрь",
+                12: "Декабрь",
+            };
+            $(function () {
+                $("#dialog").dialog({
+                    modal: true,
+                    autoOpen: false,
+                    width: 340,
+
+                    buttons: [
+                        {
+                            text: "OK",
+                            click: function () {
+                                addDataToTable();
+                            },
+                        },
+                        {
+                            text: "Cancel",
+                            click: function () {
+                                $(this).dialog("close");
+                            },
+                        },
+                    ],
+                });
+                $("#opener")
+                    .button()
+                    .click((e) => {
+                        $("#dialog").dialog("open");
+                        day = $("#day").val();
+                        month = monthsMap[$("#month-selector").val()];
+                        year = $("#year-selector").val();
+                    });
+
+                $(() => {
+                    $("#year-selector").append(years(year, nowYear));
+                    $("#year-selector").on("change", () => {
+                        year = $("#year-selector").val();
+                    });
+                });
+
+                $(() => {
+                    $("#month-selector").on("change", () => {
+                        month = monthsMap[$("#month-selector").val()];
+                    });
+                    $("#month-selector").append(months());
+                });
+
+                $(() => {
+                    $("#day").on("change", () => {
+                        day = $("#day").val();
+                    });
+                });
+
+                function addDataToTable() {
+                    $("#placeholder").hide();
+                    $(
+                        "<tr><td>" +
+                            day +
+                            "</td><td>" +
+                            month +
+                            "</td><td>" +
+                            year +
+                            "</td></tr>"
+                    ).appendTo("#date tbody");
+                    $("#dialog").dialog("close");
+                }
+            });
+            function months() {
+                let inner = "";
+                Object.keys(monthsMap).forEach((propName) => {
+                    inner += `<option value="${propName}">${monthsMap[propName]}</option>`;
+                });
+                return inner;
+            }
+            function years(from, to) {
+                let inner = "";
+                for (let i = from; i <= to; i++) {
+                    inner += `<option value="${i}">${i}</option>`;
+                }
+                return inner;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="dialog" title="Дата">
+            <input
+                type="number"
+                max="31"
+                min="1"
+                id="day"
+                maxlength="2"
+                required="true"
+                pattern="\d[0-9]{,2}"
+                size="3"
+                class="nice"
+            />
+            <select name="" id="month-selector" class="nice"></select>
+            <select name="" id="year-selector" class="nice"></select>
+        </div>
+        <table id="date" class="ui-widget nice" border="1">
+            <tr>
+                <th>День</th>
+                <th>Месяц</th>
+                <th>Год</th>
+            </tr>
+            <tr id="placeholder">
+                <td colspan="3">Нет записей</td>
+            </tr>
+        </table>
+        <button id="opener" class="nice">Ввести дату</button>
+    </body>
+</html>

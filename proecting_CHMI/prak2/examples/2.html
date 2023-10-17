@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!-- В большинстве случаев вам будет требоваться диалоговое окно, которое создается после загрузки документа (но так, чтобы структура элементов оставалась невидимой для пользователей) и которое впоследствии можно отобразить в ответ на некоторое событие.  -->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>jQuery UI</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/sunny/jquery-ui.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#dialog").dialog({});
+                $("#opener")
+                    .button()
+                    .click(function (e) {
+                        $("#dialog").dialog("open");
+                    });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="dialog" title="Диалоговое окно">
+            Содержимое, которое будет отображаться в диалоговом окне. К этому
+            <b>содержимому</b> могут применяться <em>стили</em>.
+        </div>
+        <button id="opener">Показать диалоговое окно</button>
+    </body>
+</html>

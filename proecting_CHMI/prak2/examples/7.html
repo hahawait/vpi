@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!-- Перемещение диалоговых окон и их помещение в стек -->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>jQuery UI</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/sunny/jquery-ui.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#dialog").dialog({
+                    title: "Привет",
+                    resizable: false,
+                    show: {
+                        effect: "blind",
+                        duration: 1000,
+                    },
+                    hide: {
+                        effect: "explode",
+                        duration: 1000,
+                    },
+                    position: {
+                        my: "right top",
+                        at: "center center",
+                        collision: "none",
+                    },
+                    buttons: [
+                        {
+                            text: "OK",
+                            click: function () {
+                                /* выполнить некоторые действия */
+                            },
+                        },
+                        {
+                            text: "Отмена",
+                            click: function () {
+                                $(this).dialog("close");
+                            },
+                        },
+                    ],
+                });
+
+                $("body")
+                    .append(
+                        $(
+                            '<div class="dialog" title="Диалоговое окно 2">Это второе диалоговое окно</div>'
+                        )
+                    )
+                    .append(
+                        $(
+                            '<div class="dialog" title="Диалоговое окно 3">Это третье диалоговое окно</div>'
+                        )
+                    );
+
+                $(".dialog").add("#dialog").dialog({
+                    // Указывать эти опции для значения true необязательно, здесь они указаны для демонстрации
+                    draggable: true,
+                });
+
+                $("#opener")
+                    .button()
+                    .click(function (e) {
+                        $("#dialog").dialog("open");
+                    });
+
+                $("body").append(
+                    $('<button id="show">Открыть окно</button>').button()
+                );
+
+                $("#dialog").dialog({
+                    buttons: [
+                        {
+                            text: "OK",
+                            click: function () {
+                                $(this).dialog("close");
+                            },
+                        },
+                    ],
+                    autoOpen: false,
+                    modal: true,
+                });
+
+                $("#show").click(function (e) {
+                    $("#dialog").dialog("open");
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="dialog" title="Диалоговое окно">
+            Содержимое, которое будет отображаться в диалоговом окне. К этому
+            <b>содержимому</b> могут применяться <em>стили</em>.
+        </div>
+        <button id="opener">Показать диалоговое окно</button>
+    </body>
+</html>

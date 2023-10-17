@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- Настройка местоположения диалогового окна -->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>jQuery UI</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/sunny/jquery-ui.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#dialog").dialog({
+                    title: "Привет",
+                    resizable: false,
+                    show: {
+                        effect: "blind",
+                        duration: 1000,
+                    },
+                    hide: {
+                        effect: "explode",
+                        duration: 1000,
+                    },
+                    position: {
+                        my: "right top",
+                        at: "center center",
+                        collision: "none",
+                    },
+                });
+                $("#opener")
+                    .button()
+                    .click(function (e) {
+                        $("#dialog").dialog("open");
+                    });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="dialog" title="Диалоговое окно">
+            Содержимое, которое будет отображаться в диалоговом окне. К этому
+            <b>содержимому</b> могут применяться <em>стили</em>.
+        </div>
+        <button id="opener">Показать диалоговое окно</button>
+    </body>
+</html>

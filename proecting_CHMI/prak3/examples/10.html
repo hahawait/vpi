@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>jQuery UI</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/sunny/jquery-ui.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script src="datepicker-ru.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/themes/pepper-grinder/jquery-ui.css"
+        />
+
+        <style type="text/css">
+            label {
+                margin-right: 12px;
+            }
+            input {
+                width: 200px;
+                text-align: left;
+            }
+            #dpcontainer * {
+                vertical-align: middle;
+            }
+            #dpcontainer img {
+                width: 35px;
+            }
+        </style>
+        <script type="text/javascript">
+            $(function () {
+                $.datepicker.setDefaults($.datepicker.regional["ru"]);
+                $("#datep").datepicker({
+                    numberOfMonths: [1, 3],
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <form>
+            <div id="dpcontainer" class="ui-widget">
+                <label for="datep">Дата: </label>
+                <input id="datep" />
+            </div>
+        </form>
+    </body>
+</html>

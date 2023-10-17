@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- Создание модальных диалоговых окон -->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>jQuery UI</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/sunny/jquery-ui.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <style type="text/css">
+            #dialog input {
+                width: 150px;
+                margin: 5px;
+                text-align: left;
+            }
+            #dialog label {
+                display: inline-block;
+                width: 120px;
+            }
+            table {
+                border-collapse: collapse;
+                border: thin solid black;
+                margin: 10px;
+            }
+            #placeholder {
+                text-align: center;
+            }
+            #show {
+                margin: 10px;
+            }
+            td,
+            th {
+                padding: 5px;
+                width: 100px;
+            }
+        </style>
+        <script type="text/javascript">
+            $(function () {
+                $("#dialog").dialog({
+                    buttons: [{ text: "OK", click: addDataToTable }],
+                    modal: true,
+                    autoOpen: false,
+                    width: 340,
+                });
+                $("#show")
+                    .button()
+                    .click(function () {
+                        $("#dialog").dialog("open");
+                    });
+                function addDataToTable() {
+                    $("#placeholder").hide();
+                    $(
+                        "<tr><td>" +
+                            $("#product").val() +
+                            "</td><td>" +
+                            $("#color").val() +
+                            "</td><td>" +
+                            $("#count").val() +
+                            "</td></tr>"
+                    ).appendTo("#prods tbody");
+                    $("#dialog").dialog("close");
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="dialog" title="Введите данные" class="ui-widget">
+            <div>
+                <label for="product">Продукт: </label><input id="product" />
+            </div>
+            <div><label for="color">Цвет: </label><input id="color" /></div>
+            <div>
+                <label for="count">Количество: </label><input id="count" />
+            </div>
+        </div>
+        <table id="prods" class="ui-widget" border="1">
+            <tr>
+                <th>Продукт</th>
+                <th>Цвет</th>
+                <th>Количество</th>
+            </tr>
+            <tr id="placeholder">
+                <td colspan="3">Ничего не выбрано</td>
+            </tr>
+        </table>
+        <button id="show">Добавить продукт</button>
+    </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>jQuery UI</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/sunny/jquery-ui.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script src="datepicker-ru.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/themes/pepper-grinder/jquery-ui.css"
+        />
+
+        <style type="text/css">
+            label {
+                margin: 12px;
+            }
+            input {
+                width: 200px;
+                text-align: left;
+            }
+            #wrapper > * {
+                float: left;
+            }
+            #result {
+                margin: auto;
+                padding: 10px;
+                width: 200px;
+                clear: left;
+            }
+        </style>
+        <script type="text/javascript">
+            $(function () {
+                $("#result").hide();
+
+                $.datepicker.setDefaults($.datepicker.regional["ru"]);
+                $("#dateStart, #dateEnd")
+                    .datepicker({
+                        minDate: "-7d",
+                        maxDate: "+7d",
+                        onSelect: function (date, datepicker) {
+                            if (datepicker.id == "dateStart") {
+                                $("#dateEnd")
+                                    .datepicker("setDate", date)
+                                    .datepicker("enable")
+                                    .datepicker("option", "minDate", date);
+                            }
+
+                            if (!$("#dateEnd").datepicker("isDisabled")) {
+                                var startDate =
+                                    $("#dateStart").datepicker("getDate");
+                                var endDate =
+                                    $("#dateEnd").datepicker("getDate");
+                                var diff =
+                                    endDate.getDate() - startDate.getDate();
+                                $("#dayCount").text(diff).parent().show();
+                            }
+                        },
+                    })
+                    .filter("#dateEnd")
+                    .datepicker("disable");
+            });
+        </script>
+    </head>
+    <body>
+        <form>
+            <div id="wrapper" class="ui-widget">
+                <label for="dateStart">Начало: </label
+                ><span id="dateStart"></span>
+                <label for="dateEnd">Конец: </label><span id="dateEnd"></span>
+            </div>
+            <div id="result" class="ui-widget">
+                Количество дней: <span id="dayCount"></span>
+            </div>
+        </form>
+    </body>
+</html>
