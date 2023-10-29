@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage[T1,T2A]{fontenc}
+\usepackage{dsfont}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{indentfirst}
+\renewcommand{\abstractname}{\normalfont\fontsize{14}{16}\bfseries Аннотация}
+\usepackage{enumitem} 
+\usepackage{titlesec}
+
+% Оформление основного текста
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{6pt}
+\leftskip=0pt 
+
+% Оформление заголовков
+\titleformat*{\section}{\fontsize{14}{17}\selectfont} 
+\titlespacing*{\section}{0pt}{6pt}{6pt}
+
+\renewcommand{\labelitemi}{--}
+\usepackage{titlesec}
+\begin{document}
+\addtolength{\topmargin}{-28mm}
+\addtolength{\textheight}{45mm}
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{6pt}
+\titleformat{\section}[block]{\normalfont\fontsize{14}{16}\bfseries}{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{6pt}{6pt}
+\input{HeaderRU.tex}
+\input{HeaderEng.tex}
+\input{IntroducePart.tex}
+\input{MainPart.tex}
+\input{ConclusionPart.tex}
+\input{Bibliography.tex}
+\end{document}
