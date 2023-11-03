@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>jQuery UI</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/sunny/jquery-ui.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <style type="text/css">
+            #slider {
+                margin: 10px;
+            }
+            span {
+                color: red;
+            }
+        </style>
+        <script type="text/javascript">
+            $(function () {
+                $("#slider").slider({
+                    values: [35, 65],
+                    range: true,
+                    create: displaySliderValues,
+                    slide: displaySliderValues,
+                });
+                function displaySliderValues() {
+                    $("#lower").text($("#slider").slider("values", 0));
+                    $("#upper").text($("#slider").slider("values", 1));
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="slider"></div>
+        <div>
+            Нижняя граница: <span id="lower"> </span> Верхняя граница:
+            <span id="upper"></span>
+        </div>
+    </body>
+</html>

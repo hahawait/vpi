@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Widget Button Example</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <style>
+        .my-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 50px 0;
+            cursor: pointer;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        .button-container button {
+            margin: 10px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(function() {
+            // Фабрика виджетов для myButton
+            $.widget("my.myButton", {
+                options: {
+                    text: "Button",
+                    width: 100,
+                    position: {
+                        left: 0,
+                        top: 0
+                    },
+                    backgroundColor: "#007bff"
+                },
+                _create: function() {
+                    this.element.addClass("my-button");
+                    this.refresh();
+
+                    // Добавим обработчик события click
+                    this.element.click(function() {
+                        alert("Button clicked!");
+                    });
+                },
+                refresh: function() {
+                    this.element.text(this.options.text);
+                    this.element.width(this.options.width);
+                    this.element.css("background-color", this.options.backgroundColor);
+                    this.element.css("position", "absolute");
+                    this.element.css("left", this.options.position.left + "px");
+                    this.element.css("top", this.options.position.top + "px");
+
+                    // Проверка на выход за границу
+                    if (this.options.position.left > 350) {
+                        this._trigger("myButtonoutbounds");
+
+                    }
+                },
+                move: function(distance) {
+                    this.options.position.left += distance;
+                    this.refresh();
+                    $("#positionDisplay").text("Position Left: " + this.options.position.left);
+                }
+            });
+
+            // Создание экземпляра myButton
+            var button = $("#myButton").myButton({
+                text: "Click Me",
+                width: 100,
+                position: {
+                    left: 0,
+                    top: 0
+                },
+                backgroundColor: "#007bff"
+            });
+
+            // Добавление обработчика события myButtonoutbounds
+            button.on("myButtonoutbounds", function() {
+                alert("Button out of bounds!");
+            });
+
+            // Для тестирования перемещения кнопки
+            $("#moveButton").click(function() {
+                button.myButton("move", 50);
+            });
+
+            // Добавление кнопки для смены цвета фона
+            $("#changeColorButton").click(function() {
+                button.myButton("option", "backgroundColor", "#ff5733");
+                button.myButton("refresh");
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="button-container">
+        <div id="myButton"></div>
+        <button id="moveButton">Move Button</button>
+        <button id="changeColorButton">Change Color</button>
+        <div id="positionDisplay">Position Left: 0</div>
+    </div>
+</body>
+
+
+
+</html>

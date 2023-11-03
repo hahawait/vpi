@@ -1,0 +1,37 @@
+$.widget( "demo.multi", {
+ 
+    // Здесь задается список настроек и их значений по умолчанию
+    options: { 
+      clear: null
+    },
+ 
+    // Функция, вызываемая при активации виджета на элементе
+    _create: function() {
+    },
+ 
+    // Этот метод вызывается для изменения настроек плагина
+    _setOption: function( key, value ) {
+      switch( key ) {
+        case "clear":
+          // предпринимаем действия по изменению свойства clear
+          break;
+      }
+ 
+      // В jQuery UI 1.8, можно делегировать задачи методу
+      // _setOption родительскому плагину:
+      $.Widget.prototype._setOption.apply( this, arguments );
+ 
+      // А начиная с UI 1.9 для этого достаточно вызвать метод _super
+      this._super( "_setOption", key, value );
+    },
+ 
+    // деструктор - метод, который будет вызван при удалении плагина с элемента.
+    // Он нужен чтобы очистить элемент от всех модификаций, сделанных плагином
+    // (удалить вспомогательные классы, атрибуты и элементы)
+    destroy: function() {
+      // В jQuery UI 1.8, можно делегировать задачу очищения элемента
+      // родительскому плагину
+      $.Widget.prototype.destroy.call( this );
+      // In jQuery UI 1.9 and above, you would define _destroy instead of destroy and not call the base method
+    }
+  });

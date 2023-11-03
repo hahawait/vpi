@@ -1,0 +1,39 @@
+// Зададим плагин cDialog, наследуемый от dialog
+$.widget("my.cDialog", $.ui.dialog, {
+
+  // настройки dialog автоматически перейдут cDialog,
+  options: {
+    resizable: false,
+    isCollapsed: false
+  },
+
+  // функция сворачивающая окно
+  collapse: function(){
+    // найдем элемент с кнопкой, открывающей/закрывающей окно
+    var $clButt = this.element.siblings('.ui-widget-header').find('.ui-dialog-titlebar-hideshow');
+    // проверим, не закрыто ли уже окно
+    if(this.element.hasClass('ui-dialog-hideshow-close')) return;
+    else this.element.addClass('ui-dialog-hideshow-close');
+    // скроем содержимое и ручку растягивания окна (если она есть)
+    this.element.hide().siblings('.ui-resizable-handle').hide();
+    // изменим иконку закрытия окна на обратную
+    $clButt.find('span').toggleClass('ui-icon-circle-triangle-s ui-icon-circle-triangle-n');
+    this.isCollapsed = true;
+  },
+
+  // функция разворачивающая окно
+  uncollapse: function(){
+    // найдем элемент с кнопкой, открывающей/закрывающей окно
+    var $clButt = this.element.siblings('.ui-widget-header').find('.ui-dialog-titlebar-hideshow');
+    // проверим, не открыто ли уже окно
+    if(!this.element.hasClass('ui-dialog-hideshow-close')) return;
+    else this.element.removeClass('ui-dialog-hideshow-close');
+    // откроем содержимое и ручку растягивания окна (если она есть)
+    this.element.show().siblings('.ui-resizable-handle').show();
+    // изменим иконку открытия окна на обратную
+    $clButt.find('span').toggleClass('ui-icon-circle-triangle-s ui-icon-circle-triangle-n');
+    this.isCollapsed = false;
+  },
+
+…
+});

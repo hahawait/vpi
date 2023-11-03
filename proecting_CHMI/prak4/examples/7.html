@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>jQuery UI</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/sunny/jquery-ui.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <style type="text/css">
+            #slider,
+            #rangeslider,
+            *.inputDiv {
+                margin: 10px;
+            }
+            label {
+                width: 80px;
+                display: inline-block;
+                margin: 4px;
+            }
+        </style>
+        <script type="text/javascript">
+            $(function () {
+                $("#slider").slider({
+                    value: 50,
+                    create: setInputsFromSlider,
+                    slide: setInputsFromSlider,
+                    stop: setInputsFromSlider,
+                });
+                function setInputsFromSlider() {
+                    $("#slideVal").val($("#slider").slider("value"));
+                }
+                $("#rangeslider").slider({
+                    values: [35, 65],
+                    range: true,
+                    create: setInputsFrom2Slider,
+                    slide: setInputsFrom2Slider,
+                    stop: setInputsFrom2Slider,
+                });
+                function setInputsFrom2Slider() {
+                    $("#rangeMin").val($("#rangeslider").slider("values", 0));
+                    $("#rangeMax").val($("#rangeslider").slider("values", 1));
+                }
+                $("input").change(function (e) {
+                    switch (this.id) {
+                        case "rangeMin":
+                        case "rangeMax":
+                            var index = this.id == "rangeMax" ? 1 : 0;
+                            $("#rangeslider").slider(
+                                "values",
+                                index,
+                                $(this).val()
+                            );
+                            break;
+                        case "slideVal":
+                            $("#slider").slider("value", $(this).val());
+                            break;
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="rangeslider"></div>
+        <div class="inputDiv">
+            <label for="rangeMin">Мин. значение: </label
+            ><input id="rangeMin" />
+            <label for="rangeMax">Макс. значение: </label
+            ><input id="rangeMax" />
+        </div>
+        <div id="slider"></div>
+        <div class="inputDiv">
+            <label for="slideVal">Значение индикатора: </label
+            ><input id="slideVal" />
+        </div>
+    </body>
+</html>

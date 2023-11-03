@@ -1,0 +1,52 @@
+!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>jQuery UI</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/blitzer/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+   $(function() {
+// Зададим плагин cDialog, наследуемый от dialog
+$.widget("my.cDialog", $.ui.dialog, {
+
+  // настройки dialog автоматически перейдут cDialog,
+  options: {
+    resizable: false,
+    isCollapsed: false
+  },
+
+  // конструктор плагина.
+  _create: function() {
+    // вызовем в нем конструктор родительского плагина
+    $.ui.dialog.prototype._create.call(this);
+
+    // в дальнейшем, мы разместим здесь и свои манипуляции
+  },
+
+  // деструктор плагина
+  destroy: function() {
+    // вызовем в нем деструктор родительского плагина
+    $.ui.dialog.prototype.destroy.call(this);
+  },
+
+  // обработка изменения свойств
+  _setOption: function() {
+    $.ui.dialog.prototype._setOption.apply( this, arguments );
+  }  
+
+});
+
+// установим плагин cDialog на элемент с id = wnd
+$("#wnd").cDialog();
+});
+    </script>
+</head>
+
+<body>
+   <div id="wnd" title="Заголовок">Содержимое </div>
+</body>
+
+</html>
