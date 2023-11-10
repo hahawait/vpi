@@ -1,0 +1,31 @@
+$(function() {
+    
+    $('#accordion').accordion({
+        active: false,
+        collapsible: true
+    })
+    
+    $('button').hide();
+    var ids = ["2", "1", "0", "Закрыть вкладку"];
+    for (var i = 0; i < ids.length; i++) {
+        $('<button id=' + ids[i] + '>' + ids[i] + '</button>').insertAfter('h1')
+    }
+	
+	$('button').button().click(function(e) {
+        if (this.id == "None") {
+            $('#accordion').accordion("option", "active", false);
+        } else {
+            $('#accordion').accordion("option", "active", Number(this.id));
+        }
+    });
+    
+	/* Для jQuery UI < 1.9 v.
+    $('button').button().click(function(e) {
+        if (this.id == "None") {
+            $('#accordion').accordion("activate", false);
+        } else {
+            $('#accordion').accordion("activate", Number(this.id));
+        }
+    });
+	*/
+});

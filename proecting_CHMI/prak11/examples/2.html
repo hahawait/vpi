@@ -1,0 +1,10 @@
+$(function() {
+	
+	$('<h2><a href=#>Все</a></h2><div id=row0></div>')
+		 .prependTo('#accordion').filter('div')
+		 .append($('#row1, #row2, #row3').clone())
+		 
+    $('#accordion').accordion();
+	$('button').button();
+	
+});
