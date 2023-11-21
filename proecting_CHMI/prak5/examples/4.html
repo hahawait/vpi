@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>jQuery UI</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/sunny/jquery-ui.css"
+        />
+        <style type="text/css">
+            .ui-progressbar-value {
+                background-image: url(http://www.professorweb.ru/downloads/jquery/progress-animation.gif);
+            }
+            .ui-progressbar {
+                height: 22px;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                // Добавить текстовый индикатор
+                $("#progressDiv").after(
+                    $(
+                        '<p style="text-align:center">Ход процесса: <span id="progVal"></span>%</p>'
+                    )
+                );
+                $("#progressDiv").progressbar({
+                    value: 0,
+                    // Используем событие change
+                    change: function (e) {
+                        $("#progVal").text(
+                            $("#progressDiv").progressbar("value")
+                        );
+                    },
+                });
+                var i = 0;
+                function startProgress() {
+                    if (i > 100) return;
+                    else $("#progressDiv").progressbar("value", i++);
+                    setTimeout(startProgress, 50);
+                }
+                startProgress();
+            });
+        </script>
+    </head>
+    <body>
+        <div id="progressDiv"></div>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>jQuery UI</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/themes/pepper-grinder/jquery-ui.css"
+        />
+        <script type="text/javascript">
+            $(function () {
+                $(".jqButton").click(function (e) {
+                    e.preventDefault();
+                    $(this).button();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <form>
+            <input
+                class="jqButton"
+                type="submit"
+                id="inputSubmit"
+                value="Submit"
+            />
+            <input
+                class="jqButton"
+                type="reset"
+                id="inputReset"
+                value="Reset"
+            />
+            <input
+                class="jqButton"
+                type="button"
+                id="inputButton"
+                value="Input Button"
+            />
+            <button class="jqButton">Button Element</button>
+            <a class="jqButton" href="http://apress.com">A Element</a>
+        </form>
+    </body>
+</html>

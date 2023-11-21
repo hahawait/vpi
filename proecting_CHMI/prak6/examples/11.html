@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>jQuery UI</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/themes/pepper-grinder/jquery-ui.css"
+        />
+        <script type="text/javascript">
+            $(function () {
+                $("#radioDiv").buttonset();
+            });
+        </script>
+    </head>
+    <body>
+        <form>
+            <div id="radioDiv">
+                <input type="radio" name="flower" id="rose" checked />
+                <label for="rose">Роза</label>
+                <input type="radio" name="flower" id="lily" /><label for="lily"
+                    >Лилия</label
+                >
+                <input type="radio" name="flower" id="iris" /><label for="iris"
+                    >Орхидея</label
+                >
+            </div>
+        </form>
+    </body>
+</html>

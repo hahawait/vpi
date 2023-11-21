@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/sunny/jquery-ui.css"
+        />
+        <style type="text/css">
+            .slider {
+                margin: 10px;
+                width: 92%;
+            }
+
+            .right-align {
+                text-align: right;
+            }
+
+            .ui-slider-handle .custom-handle {
+                width: 3em;
+                height: 1.6em;
+                top: 50%;
+                margin-top: -0.8em;
+                text-align: center;
+                line-height: 1.6em;
+            }
+
+            .ui-progressbar-value {
+                background-image: url(http://www.professorweb.ru/downloads/jquery/progress-animation.gif);
+            }
+
+            #progValText {
+                font-weight: 700;
+                color: black;
+            }
+
+            .ui-progressbar {
+                height: 22px;
+            }
+
+            input {
+                width: 20%;
+            }
+
+            label {
+                width: 130px;
+                display: inline-block;
+                margin: 4px;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#dialog, #dialog2").dialog({
+                    modal: true,
+                    autoOpen: false,
+                    width: 640,
+                });
+
+                $("#button1_1")
+                    .button()
+                    .click(function () {
+                        $("#dialog2").dialog("open");
+                    });
+                $("#button1_2")
+                    .button()
+                    .click(function () {
+                        document.getElementById("button1_2").style.display =
+                            "none";
+                        var mytext = document.getElementById("progValText");
+                        mytext.textContent = "Ход процесса: ";
+                        mytext.style.color = "black";
+                        startProgressCal();
+                    });
+                $("#button1_3")
+                    .button()
+                    .click(function () {
+                        $("#dialog").dialog("close");
+                    });
+
+                $("#button2_1")
+                    .button()
+                    .click(function () {
+                        setInputsFromSlider();
+                        $("#dialog2").dialog("close");
+                    });
+                $("#button2_2")
+                    .button()
+                    .click(function () {
+                        $("#dialog2").dialog("close");
+                    });
+
+                // $("#dialog").dialog({
+                //     buttons: [
+                //         {
+                //             text: "Граничные условия",
+                //             click: () => {
+                //                 $("#dialog2").dialog("open");
+                //             },
+                //         },
+                //         {
+                //             text: "Пуск",
+                //             click: () => {
+                //                 // document.getElementById(
+                //                 //     "dialog"
+                //                 // ).style.display = "none";
+                //                 var mytext =
+                //                     document.getElementById("progValText");
+                //                 mytext.textContent = "Ход процесса: ";
+                //                 mytext.style.color = "black";
+                //                 startProgressCal();
+                //             },
+                //         },
+                //         {
+                //             text: "Выход",
+                //             click: () => {
+                //                 $("#dialog").dialog("close");
+                //             },
+                //         },
+                //     ],
+                // });
+
+                $("#dialog2").dialog({
+                    buttons: [
+                        {
+                            text: "OK",
+                            click: () => {
+                                setInputsFromSlider();
+                                $("#dialog2").dialog("close");
+                            },
+                        },
+                        {
+                            text: "Cancel",
+                            click: () => {
+                                $("#dialog2").dialog("close");
+                            },
+                        },
+                    ],
+                });
+
+                $("#calculate")
+                    .button()
+                    .click(function () {
+                        $("#dialog").dialog("open");
+                    });
+
+                $("#rangeslider").slider({
+                    values: [0, 10],
+                    min: 0,
+                    max: 50,
+                    range: true,
+                    create: function () {
+                        update2SliderValue();
+                        setInputsFrom2Slider();
+                    },
+                    slide: function () {
+                        update2SliderValue();
+                        setInputsFrom2Slider();
+                    },
+                    stop: function () {
+                        update2SliderValue();
+                        setInputsFrom2Slider();
+                    },
+                });
+                $("#slider").slider({
+                    value: 50,
+                    min: 0,
+                    max: 50,
+                    create: function (event, ui) {
+                        updateSliderValue(event, ui);
+                        setInputsFromSlider();
+                    },
+                    slide: updateSliderValue,
+                });
+                $("#progressDiv").progressbar({
+                    value: 0,
+                    max: 100,
+                    change: function (e) {
+                        $("#progVal").text(
+                            $("#progressDiv").progressbar("value") + "%"
+                        );
+                    },
+                    complete: function () {
+                        var a = parseFloat($("#rangeMin").val());
+                        var b = parseFloat($("#rangeMax").val());
+                        var N = parseFloat($("#slider").slider("value"));
+                        $("#result").val(integral(a, b, N));
+                        var mytext = document.getElementById("progValText");
+                        mytext.textContent = "Выполнено!";
+                        mytext.style.color = "green";
+                        $("#progVal").text("");
+                        document.getElementById("button1_2").style.display = "";
+                    },
+                });
+                function updateSliderValue(event, ui) {
+                    $("#handle").text(ui.value);
+                }
+                function update2SliderValue() {
+                    $("#handle1").text($("#rangeslider").slider("values", 0));
+                    $("#handle2").text($("#rangeslider").slider("values", 1));
+                }
+                function setInputsFromSlider() {
+                    $("#rangeMin").val($("#rangeslider").slider("values", 0));
+                    $("#rangeMax").val($("#rangeslider").slider("values", 1));
+                }
+                function setInputsFrom2Slider() {
+                    $("#rangeMin1").val($("#rangeslider").slider("values", 0));
+                    $("#rangeMax1").val($("#rangeslider").slider("values", 1));
+                }
+
+                $("input").change(function (e) {
+                    var regEx = /^rangeMax/;
+                    var index = regEx.test(this.id) ? 1 : 0;
+                    $("#rangeslider").slider("values", index, $(this).val());
+                    setInputsFrom2Slider();
+                    update2SliderValue();
+                });
+            });
+            function integral(a, b, n) {
+                var s, d, xb, xe, x;
+                s = 0;
+                d = (b - a) / n;
+                xb = a;
+                for (i = 0; i < n; i++) {
+                    xe = xb + d;
+                    x = (xb + xe) / 2;
+                    s = s + d * Math.sin(x);
+                    xb = xe;
+                }
+                return s;
+            }
+            function startProgressCal() {
+                var i = 0;
+                startProgress();
+                function startProgress() {
+                    if (i > 100) {
+                        return;
+                    } else {
+                        i += 1;
+                        $("#progressDiv").progressbar("value", i);
+                    }
+                    setTimeout(startProgress, 5);
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div id="dialog" title="Lab">
+            <div>
+                <label for="rangeMin">Мин. значение: </label
+                ><input id="rangeMin" />
+                <label for="rangeMax">Макс. значение: </label
+                ><input id="rangeMax" />
+            </div>
+            <div id="slider" class="slider">
+                <div id="handle" class="ui-slider-handle custom-handle">50</div>
+            </div>
+            <p style="text-align: left">
+                <span id="progValText">Ход процесса: </span
+                ><span id="progVal">0%</span>
+            </p>
+            <div id="progressDiv"></div>
+            <div class="right-align">
+                <label for="result">Результат: </label><input id="result" />
+                <hr color="gray" />
+                <button id="button1_1">Граничные условия</button>
+                <button id="button1_2">Пуск</button>
+                <button id="button1_3">Выход</button>
+            </div>
+        </div>
+        <div id="dialog2" title="Границы">
+            <div id="rangeslider">
+                <div id="handle1" class="ui-slider-handle custom-handle">0</div>
+                <div id="handle2" class="ui-slider-handle custom-handle">1</div>
+            </div>
+            <div>
+                <label for="rangeMin">Мин. значение: </label
+                ><input id="rangeMin1" />
+                <label for="rangeMax">Макс. значение: </label
+                ><input id="rangeMax1" />
+            </div>
+        </div>
+        <button id="calculate">Вычислить интеграл</button>
+    </body>
+</html>

@@ -1,0 +1,223 @@
+<html>
+    <head>
+        <title>jQuery UI</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/themes/sunny/jquery-ui.css"
+        />
+
+        <style type="text/css">
+            INPUT {
+                width: 45px;
+            }
+
+            .calc-table button {
+                width: 70px;
+                height: 35px;
+            }
+        </style>
+
+        <script type="text/javascript">
+            $(function () {
+                $("button").button();
+                $("#dialog").dialog({
+                    modal: true,
+                    autoOpen: false,
+                    width: 400,
+                });
+
+                $("#show")
+                    .button()
+                    .click(function () {
+                        $("#dialog").dialog("open");
+                        return false;
+                    });
+                const table = $("#dialog table");
+                const inpt = $("#monitor");
+
+                function AddText(text) {
+                    if (text === "PI") {
+                        console.log(text);
+                        inpt.val(inpt.val() + (Math.PI%10000));
+                        return
+                    }
+                    if (text === "E") {
+                        console.log(text);
+                        inpt.val(inpt.val() + (Math.E%10000));
+                        return
+                    }
+                    if (text == ".") {
+                        inpt.val(inpt.val().replace("\.", ""));
+                    }
+                    inpt.val(inpt.val() + text);
+                }
+
+                table.on("click", "button", function () {
+                    const buttonValue = $(this).text();
+
+                    console.log(buttonValue);
+                    switch (buttonValue) {
+                        case "ON/C":
+                            inpt.val("");
+                            $(".butt").button("option", "disabled", false);
+                            break;
+                        case "OFF":
+                            inpt.val("");
+                            $(".butt").button("option", "disabled", true);
+                            break;
+                        case "/":
+                        case "*":
+                        case "-":
+                        case "+":
+                            num1 = inpt.val();
+                            inpt.val("");
+                            oper = buttonValue;
+                            break;
+                        case "=":
+                            result();
+                            break;
+                        case "SQR":
+                            inpt.val(inpt.val() * inpt.val());
+                            break;
+                        case "SQRT":
+                            inpt.val(Math.sqrt(inpt.val()));
+                            break;
+                        default:
+                            if (
+                                parseInt(buttonValue) ||
+                                buttonValue == "0" ||
+                                buttonValue == "." ||
+                                buttonValue == "PI" ||
+                                buttonValue == "E"
+                            ) {
+                                AddText(buttonValue);
+                            }
+                            break;
+                    }
+                });
+
+                var oper = "+";
+
+                function result() {
+                    var R,
+                        c = 1;
+                    num2 = inpt.val();
+                    switch (oper) {
+                        case "/":
+                            R = num1 / num2;
+                            break;
+                        case "*":
+                            R = num1 * num2;
+                            break;
+                        case "-":
+                            R = num1 - num2;
+                            break;
+                        case "+":
+                            R = num1 * c + num2 * c;
+                            break;
+                    }
+
+                    inpt.val(R);
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="dialog" title="Калькулятор" class="ui-widget">
+            <div id="Calc" size="200">
+                <table class="calc-table">
+                    <tr>
+                        <input
+                            type="text"
+                            id="monitor"
+                            style="text-align: right; width: 375px"
+                        />
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="butt" disabled="1">7</button>
+                        </td>
+                        <td>
+                            <button class="butt" id="b8" disabled="1">8</button>
+                        </td>
+                        <td>
+                            <button class="butt" id="b9" disabled="1">9</button>
+                        </td>
+                        <td>
+                            <button class="butt" id="div" disabled="1">/</button>
+                        </td>
+                        <td>
+                            <button class="butt" id="off" disabled="1">OFF</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="butt" id="b4" disabled="1">4</button>
+                        </td>
+                        <td>
+                            <button class="butt" id="b5" disabled="1">5</button>
+                        </td>
+                        <td>
+                            <button class="butt" id="b6" disabled="1">6</button>
+                        </td>
+                        <td>
+                            <button class="butt" id="mult" disabled="1">*</button>
+                        </td>
+                        <td>
+                            <button class="butt" id="sqr" disabled="1">SQR</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="butt" id="b1" disabled="1">1</button>
+                        </td>
+                        <td>
+                            <button class="butt" id="b2" disabled="1">2</button>
+                        </td>
+                        <td>
+                            <button class="butt" id="b3" disabled="1">3</button>
+                        </td>
+                        <td>
+                            <button class="butt" id="subt" disabled="1">-</button>
+                        </td>
+                        <td>
+                            <button class="butt" id="sqrt" disabled="1">SQRT</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="butt" id="b0" disabled="1">0</button>
+                        </td>
+                        <td>
+                            <button class="butt" id="fix" disabled="1">.</button>
+                        </td>
+                        <td>
+                            <button class="butt" id="bpi" disabled="1">PI</button>
+                        </td>
+                        <td>
+                            <button class="butt" id="add" disabled="1">+</button>
+                        </td>
+                        <td>
+                            <button id="fault">ON/C</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="butt" id="e" disabled="1">E</button>
+                        </td>
+                        <td colspan="4">
+                            <button
+                                class="butt"
+                                style="width: 100%"
+                                disabled="1"
+                            >=</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <button id="show">Калькулятор</button>
+    </body>
+</html>
