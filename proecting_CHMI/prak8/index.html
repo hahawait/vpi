@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/sunny/jquery-ui.css">
+
+</head>
+<body>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tab-1">Вопрос 1</a></li>
+        <li><a href="#tab-2">Вопрос 2</a></li>
+        <li><a href="#tab-3">Вопрос 3</a></li>
+        <li><a href="#tab-4">Вопрос 4</a></li>
+        <li><a href="#tab-5">Вопрос 5</a></li>
+    </ul>
+    <div id="tab-1">
+        <h2>Вопрос 1: Выезжая с грунтовой дороги, Вы попадаете:</h2>
+        <img src="ticket_photos/1.png" alt="Фото вопроса 1"><br>
+        <input type="radio" name="q1" value="a"> На главную<br>
+        <input type="radio" name="q1" value="b"> На равнозначную<br>
+    </div>
+    <div id="tab-2">
+        <h2>Вопрос 2: В каком месте Вы должны остановиться</h2>
+        <img src="ticket_photos/2.png" alt="Фото вопроса 2"><br>
+        <input type="radio" name="q2" value="a"> Перед знаком (А)<br>
+        <input type="radio" name="q2" value="b"> Перед перекрестком (Б)<br>
+        <input type="radio" name="q2" value="c"> Перед краем пересекаемой проезжей части (В)<br>
+    </div>
+    <div id="tab-3">
+        <h2>Вопрос 3: В каком случае Вам необходимо двигаться со скоростью до 40 км/ч?</h2>
+        <img src="ticket_photos/3.png" alt="Фото вопроса 3"><br>
+        <input type="radio" name="q3" value="a"> Во всех случаях<br>
+        <input type="radio" name="q3" value="b"> Только в том случае, когда покрытие на дороге влажное<br>
+    </div>
+    <div id="tab-4">
+        <h2>Вопрос 4: Какие из знаков устанавливают в начале дороги с односторонним движением?</h2>
+        <img src="ticket_photos/4.png" alt="Фото вопроса 4"><br>
+        <input type="radio" name="q4" value="a"> Только A<br>
+        <input type="radio" name="q4" value="b"> Только Б<br>
+        <input type="radio" name="q4" value="c"> Б и Г<br>
+        <input type="radio" name="q4" value="d"> Б и В<br>
+    </div>
+    <div id="tab-5">
+        <h2>Вопрос 5: Можете ли Вы остановиться в этом месте для посадки или высадки пассажиров?</h2>
+        <img src="ticket_photos/5.png" alt="Фото вопроса 5"><br>
+        <input type="radio" name="q5" value="a"> Да<br>
+        <input type="radio" name="q5" value="b"> Да, если Вы не создадите помех движению маршрутных транспортных средств.<br>
+        <input type="radio" name="q5" value="c"> Нет<br>
+    </div>
+</div>
+
+<button id="submit">Результаты опроса</button>
+
+<div id="resultModal" style="display: none;">
+    <p id="resultText"></p>
+</div>
+
+<script>
+$(function() {
+    $("#tabs").tabs();
+    $("#submit").click(function() {
+        let score = 0;
+        const answers = {
+            q1: "a",
+            q2: "c",
+            q3: "b",
+            q4: "b",
+            q5: "b"
+        };
+
+        for (let i = 1; i <= 5; i++) {
+            const selectedAnswer = $("input[name=q" + i + "]:checked").val();
+            if (selectedAnswer === answers["q" + i]) {
+                score++;
+            }
+        }
+
+        const resultText = "Вы набрали " + score + " из 5 баллов.";
+        $("#resultText").text(resultText);
+        $("#resultModal").dialog();
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+$(function() {
+    
+    $('#tabs').tabs();
+    
+    $('button').button().click(function(e) {
+        var tabsElem = $('#tabs');
+        if (this.id == "add") {
+			// Добавляем вкладку
+			$( "<li><a href='#tab1'>" + $('#tabLabel').val() +"</a></li>" )
+			          .appendTo( "#tabs .ui-tabs-nav" );
+			tabsElem.tabs("refresh");
+        } else {
+            // Ищем активную вкладку и удаляем содержимое и вкладку
+			var tabIndex = tabsElem.tabs("option", "active");
+			tabsElem.find('li:eq(' + tabIndex + ')').css('display','none');
+			tabsElem.tabs("refresh");
+        }
+    })
+    
+});
+</script>
+</head>
+<body>
+<h1>Цветочный магазин</h1>
+<div id="dc1" class="ui-widget">
+        <label for="tabLabel" style="width:130px">Имя вкладки: </label><input id="tabLabel" style="width:150px"/>
+        <button id="add">Добавить вкладку</button>
+        <button id="remove">Удалить активную вкладку</button>
+</div>
+<form method="post" action="phphandler.php">
+    <div id="tabs">
+        <ul>
+            <li><a href="#tab1">Ряд 1</a>
+            <li><a href="#tab2">Ряд 2</a>
+            <li><a href="#tab3">Ряд 3</a>          
+        </ul>
+</form>

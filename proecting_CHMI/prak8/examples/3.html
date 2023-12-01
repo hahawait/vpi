@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+$(function() {
+    
+    $('#tabs').tabs({
+        beforeActivate: function(event, ui) {
+            $('input:checkbox').button("enable")
+			      .filter('#cb' + (Number(ui.newTab.text().substring(3))-1))
+				  .button("disable");
+        }
+    });
+            
+    $('input:checkbox').button().click(function() {
+        var disabledPositions = [];
+        $('input:checked')
+		    .each(function(index, elem) {
+                disabledPositions.push($(this).data("index"));
+        })
+		console.log(disabledPositions)
+        $('#tabs').tabs("option", "disabled", disabledPositions)
+    });	
+    
+});
+</script>
+    <div id="buttonDiv">
+            <label for="cb0">Вкладка 1</label>
+            <input type="checkbox" id="cb0" data-index=0 disabled>
+            <label for="cb1">Вкладка 2</label>
+            <input type="checkbox" id="cb1" data-index=1>
+            <label for="cb2">Вкладка 3</label>
+            <input type="checkbox" id="cb2" data-index=2>
+    </div>
